@@ -7,6 +7,7 @@ const es = require('event-stream');
 
 const { mapper } = require("./site/mapper");
 const { getStream } = require("./site/loader");
+const { getSerializerStream } = require("./utils/stream-utility")
 
 const pipeline = promisify(stream.pipeline);
 
@@ -17,19 +18,6 @@ async function readData(data, callback) {
     return;
   }
   callback(null, mapped);
-}
-
-function getSerializer() {
-  let first = true;
-  return es.through(function write(data) {
-    const value = `${first ? "[" : ","}\n${JSON.stringify(data, null, 2)}`;
-    first = false;
-    this.emit('data', value)
-  },
-  function end () {
-    this.emit('data', "\n]");
-    this.emit('end');
-  });
 }
 
 function getDestination() {
@@ -43,7 +31,7 @@ async function importer(){
     getStream(),
     JSONStream.parse('*'),
     es.map(readData),
-    getSerializer(),
+    getSerializerStream(),
     getDestination()
   );
   console.log("done");
