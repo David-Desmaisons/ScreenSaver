@@ -23,7 +23,8 @@ async function load(){
 }
 
 function getStream() {
-  return got.stream(url, option);
+  return got.stream(url, option)
+            .on("downloadProgress", ({percent}) => console.log(`download ${percent*100}% done`));
 }
 
 module.exports = {
