@@ -1,6 +1,7 @@
 const got = require('got');
 
 const userAgent = process.env.userAgent;
+const timeOutRetrial = parseInt(process.env.timeOutRetrial);
 
 function isSuccess(statusCode){
   return statusCode>= 200 && statusCode<300;
@@ -12,10 +13,7 @@ async function checkResource(url, contentType){
       method: "HEAD",
       throwHttpErrors: false,
       retry: {
-        limit: 2,
-        calculateDelay: ({attemptCount}) =>{
-          return (attemptCount===1) ? 750 : 0;
-        } 
+        calculateDelay: ({attemptCount}) => (attemptCount!==1) ? 0 : timeOutRetrial
       },
       header:{
         "user-agent": userAgent,
