@@ -11,7 +11,12 @@ async function checkResource(url, contentType){
 		const response = await got(url, {
       method: "HEAD",
       throwHttpErrors: false,
-      retry: 0,
+      retry: {
+        limit: 2,
+        calculateDelay: ({attemptCount}) =>{
+          return (attemptCount===1) ? 750 : 0;
+        } 
+      },
       header:{
         "user-agent": userAgent,
         "content-type": contentType

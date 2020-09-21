@@ -3,10 +3,10 @@ class Location {
     this.title = title;
     this.city = city;
     this.country = country;
-    this.position = {
+    this.position = ((latitude!=null) && (longitude!=null)) ? {
       latitude,
       longitude
-    }
+    } : null;
   }
 }
 

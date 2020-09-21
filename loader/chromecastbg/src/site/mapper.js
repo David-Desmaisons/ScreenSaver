@@ -3,9 +3,10 @@ const {checkResource} = require("../utils/checkResource");
 
 const provider = "chromeCast";
 
-async function mapper({url, name, photographer, location}){
+async function mapper({url, name, photographer, location: rawLocation}){
   const success = await checkResource(url, "image/*");
-  return success ? {url, name, photographer, provider, location: new Location({ title: location})} : null;
+  const location = rawLocation?  new Location({ title: rawLocation}) : null;
+  return success ? {url, name, photographer, provider, location} : null;
 }
 
 module.exports = {
