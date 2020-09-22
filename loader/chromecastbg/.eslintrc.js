@@ -10,7 +10,14 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 12
   },
-  "plugins": ["jest"],
+  plugins: ["jest"],
   rules: {
-  }
+  },
+  overrides: [
+		{
+			env: {
+				jest: true
+			}
+		}
+	]
 }
