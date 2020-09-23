@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "app": "node src/index.js",
+    "start": "node src/index.js",
     "test": "jest"
   },
   "repository": {
@@ -31,6 +31,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "jest": "^26.4.2"
+    "jest": "^26.4.2",
+    "prettier": "2.1.2"
   }
 }
