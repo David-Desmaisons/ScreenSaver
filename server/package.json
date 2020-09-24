@@ -1,0 +1,23 @@
+{
+  "name": "screen-saver-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "app": "node src/server.js",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/David-Desmaisons/ScreenSaver.git"
+  },
+  "author": "David Desmaisons",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/David-Desmaisons/ScreenSaver/issues"
+  },
+  "homepage": "https://github.com/David-Desmaisons/ScreenSaver#readme",
+  "dependencies": {
+    "@hapi/hapi": "^20.0.1"
+  }
+}
