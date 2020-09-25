@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "app": "node src/server.js",
+    "start": "npx nodemon src/server.js",
     "test": "jest"
   },
   "repository": {
@@ -19,5 +19,8 @@
   "homepage": "https://github.com/David-Desmaisons/ScreenSaver#readme",
   "dependencies": {
     "@hapi/hapi": "^20.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
