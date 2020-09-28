@@ -1,41 +1,25 @@
-const Joi = require("joi");
-
-const positionModel = Joi.object({
-  latitude: Joi.number(),
-  longitude: Joi.number(),
-}).label("Position");
-
-const locationModel = Joi.object({
-  title: Joi.string(),
-  city: Joi.string(),
-  country: Joi.string(),
-  position: positionModel
-}).label("Location");
-
-const responseModel = Joi.object({
-  url: Joi.string(),
-  description: Joi.string(),
-  photographer: Joi.string(),
-  provider: Joi.string(),
-  location: locationModel.allow( null ),
-}).label("Wallpaper");
+const { responseModel, wallPaperQuery } = require("./model/contract");
 
 const routes = [
   {
     method: "GET",
     path: "/wallpaper",
     options: {
-      tags: ['api'],
+      tags: ["api"],
+      response: { schema: responseModel },
+      validate:{
+        query: wallPaperQuery
+      },
       handler: (request, h) => {
         return {
-          "url": "https://lh4.googleusercontent.com/-9n3C3hJmGGc/UQmHUE2y6RI/AAAAAAAAgu8/08oNF_dL83w/s2560/IMG_1311.jpg",
-          "description": "IMG-1311.jpg",
-          "photographer": "Grzegorz Głowaty",
-          "provider": "chromeCast",
-          "location": null
+          url:
+            "https://lh4.googleusercontent.com/-9n3C3hJmGGc/UQmHUE2y6RI/AAAAAAAAgu8/08oNF_dL83w/s2560/IMG_1311.jpg",
+          description: "IMG-1311.jpg",
+          photographer: "Grzegorz Głowaty",
+          provider: "chromeCast",
+          location: null,
         };
       },
-      response: { schema: responseModel },
     },
   },
   {
