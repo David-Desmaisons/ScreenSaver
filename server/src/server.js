@@ -1,16 +1,5 @@
-const Hapi = require("@hapi/hapi");
+const { createServer } = require("./serverBuilder");
 const { resilient } = require("./utils/resilient");
-const { routes } = require("./routes");
-
-const createServer = async (port) => {
-  const server = Hapi.server({
-    port,
-    host: "localhost",
-  });
-  server.route(routes);
-  await server.start();
-  return server;
-};
 
 const init = async () => {
   const server = await resilient((port) => createServer(port + 3000), 10);
@@ -19,6 +8,7 @@ const init = async () => {
     return;
   }
   console.log("Server running on %s", server.info.uri);
+  console.log("Documentation running on %s/documentation", server.info.uri);
 };
 
 process.on("unhandledRejection", (err) => {
