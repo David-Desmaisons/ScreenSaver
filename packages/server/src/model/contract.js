@@ -9,7 +9,7 @@ const locationModel = Joi.object({
   title: Joi.string(),
   city: Joi.string(),
   country: Joi.string(),
-  position: positionModel
+  position: positionModel.allow( null )
 }).label("Location");
 
 const responseModel = Joi.object({

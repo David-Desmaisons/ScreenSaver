@@ -10,7 +10,7 @@ const routes = [
       validate:{
         query: wallPaperQuery
       },
-      handler: (request, h) => {
+      handler(){
         return {
           url:
             "https://lh4.googleusercontent.com/-9n3C3hJmGGc/UQmHUE2y6RI/AAAAAAAAgu8/08oNF_dL83w/s2560/IMG_1311.jpg",
@@ -25,7 +25,7 @@ const routes = [
   {
     method: "*",
     path: "/{any*}",
-    handler: function (request, h) {
+    handler(_, h) {
       return h.response("Resource Not Found!").code(404);
     },
   },
