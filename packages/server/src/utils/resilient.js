@@ -4,7 +4,9 @@ const resilient = async (action, count) => {
     try {
       const result = await action(i);
       return result;
-    } catch {}
+    } catch(exception) {
+      console.log(exception);
+    }
   } while (i++ < count);
   return null;
 };
