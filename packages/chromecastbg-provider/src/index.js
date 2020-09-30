@@ -1,5 +1,5 @@
-const getWallPaper = ({
-    forceRefresh
+const getWallpaper = ({
+    forceRefresh= false
 }) => {
     return {
         url: "https://lh4.googleusercontent.com/-9n3C3hJmGGc/UQmHUE2y6RI/AAAAAAAAgu8/08oNF_dL83w/s2560/IMG_1311.jpg",
@@ -12,5 +12,5 @@ const getWallPaper = ({
 
 
 module.exports = {
-    getWallPaper
+  getWallpaper
 }

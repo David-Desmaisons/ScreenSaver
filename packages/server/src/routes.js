@@ -1,36 +1,35 @@
 const { responseModel, wallPaperQuery } = require("./model/contract");
+const { Finder } = require("./core/wallpaperFinder");
+const { loadProviders } = require("./core/loader");
 
-const routes = [
-  {
-    method: "GET",
-    path: "/wallpaper",
-    options: {
-      tags: ["api"],
-      response: { schema: responseModel },
-      validate:{
-        query: wallPaperQuery
-      },
-      handler(){
-        return {
-          url:
-            "https://lh4.googleusercontent.com/-9n3C3hJmGGc/UQmHUE2y6RI/AAAAAAAAgu8/08oNF_dL83w/s2560/IMG_1311.jpg",
-          description: "IMG-1311.jpg",
-          photographer: "Grzegorz Głowaty",
-          provider: "chromeCast",
-          location: null,
-        };
+const routesProvider = async () => {
+  const providers = await loadProviders();
+  const finder = new Finder(providers);
+  return [
+    {
+      method: "GET",
+      path: "/wallpaper",
+      options: {
+        tags: ["api"],
+        response: { schema: responseModel },
+        validate: {
+          query: wallPaperQuery,
+        },
+        handler(request, h) {
+          return finder.getWallpaper(request.query);
+        },
       },
     },
-  },
-  {
-    method: "*",
-    path: "/{any*}",
-    handler(_, h) {
-      return h.response("Resource Not Found!").code(404);
+    {
+      method: "*",
+      path: "/{any*}",
+      handler(_, h) {
+        return h.response("Resource Not Found!").code(404);
+      },
     },
-  },
-];
+  ];
+};
 
 module.exports = {
-  routes,
+  routesProvider,
 };

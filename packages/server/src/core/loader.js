@@ -6,10 +6,10 @@ const readdirAsync = promisify(fs.readdir);
 
 function loadModule(directory) {
   const packagePath = path.join(directory, "package.json");
-  const package = require(packagePath);
-  const mainPath = path.join(directory, package.main);
-  const { getWallPaper } = require(mainPath);
-  return getWallPaper ? {getWallPaper, provider: package.name} : null;
+  const { main, name } = require(packagePath);
+  const mainPath = path.join(directory, main);
+  const { getWallpaper } = require(mainPath);
+  return getWallpaper ? { getWallpaper, name } : null;
 }
 
 function safeLoadModule(rootPath, directory) {
@@ -32,7 +32,8 @@ async function loadProviders() {
   const getters = directories
     .map((directory) => safeLoadModule(rootPath, directory))
     .filter((getter) => !!getter);
-  console.log(getters);
+  console.log("Providers found:",getters.map(g => g.name));
+  return getters;
 }
 
 module.exports = {
