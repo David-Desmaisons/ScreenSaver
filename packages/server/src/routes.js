@@ -2,6 +2,7 @@ const { wallPaperModel, providerModel, wallPaperQuery } = require("./model/contr
 const { Finder } = require("./core/wallpaperFinder");
 const { loadProviders } = require("./core/loader");
 const Chance = require('chance');
+const { ProviderNotFound } = require("./core/providerNotFound");
 
 const routesProvider = async () => {
   const providers = await loadProviders();
@@ -17,7 +18,15 @@ const routesProvider = async () => {
           query: wallPaperQuery,
         },
         handler(request, h) {
-          return finder.getWallpaper(request.query);
+          try {
+            return finder.getWallpaper(request.query);
+          }
+          catch(error){
+            if (error instanceof ProviderNotFound){
+               return h.response(error.getMessage()).code(404);
+            }
+            throw error;
+          }
         },
       },
     },
@@ -28,7 +37,7 @@ const routesProvider = async () => {
         tags: ["api"],
         response: { schema: providerModel },
         handler() {
-          return providers.map(p => p.name);
+          return providers.map(({name, version}) => ({name, version}));
         },
       },
     },

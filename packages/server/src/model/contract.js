@@ -22,9 +22,13 @@ const wallPaperModel = Joi.object({
 
 const wallPaperQuery = Joi.object({
   forceRefresh: Joi.boolean().default(false),
+  provider: Joi.string().default(null)
 });
 
-const providerModel = Joi.array().items(Joi.string());
+const providerModel = Joi.array().items(Joi.object({
+  name: Joi.string(),
+  version: Joi.string()
+}));
 
 module.exports = {
   positionModel,
