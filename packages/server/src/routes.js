@@ -1,28 +1,34 @@
-const { responseModel, wallPaperQuery } = require("./model/contract");
+const { wallPaperModel, providerModel, wallPaperQuery } = require("./model/contract");
 const { Finder } = require("./core/wallpaperFinder");
 const { loadProviders } = require("./core/loader");
 const Chance = require('chance');
 
-async function createFinder(){
+const routesProvider = async () => {
   const providers = await loadProviders();
   const finder = new Finder(providers, new Chance());
-  return finder;
-}
-
-const routesProvider = async () => {
-  const finder = await createFinder();
   return [
     {
       method: "GET",
       path: "/wallpaper",
       options: {
         tags: ["api"],
-        response: { schema: responseModel },
+        response: { schema: wallPaperModel },
         validate: {
           query: wallPaperQuery,
         },
         handler(request, h) {
           return finder.getWallpaper(request.query);
+        },
+      },
+    },
+    {
+      method: "GET",
+      path: "/providers",
+      options: {
+        tags: ["api"],
+        response: { schema: providerModel },
+        handler() {
+          return providers.map(p => p.name);
         },
       },
     },

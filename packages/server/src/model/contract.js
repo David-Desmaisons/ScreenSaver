@@ -12,7 +12,7 @@ const locationModel = Joi.object({
   position: positionModel.allow(null),
 }).label("Location");
 
-const responseModel = Joi.object({
+const wallPaperModel = Joi.object({
   url: Joi.string(),
   description: Joi.string().allow(""),
   photographer: Joi.string().allow(""),
@@ -24,9 +24,12 @@ const wallPaperQuery = Joi.object({
   forceRefresh: Joi.boolean().default(false),
 });
 
+const providerModel = Joi.array().items(Joi.string());
+
 module.exports = {
   positionModel,
   locationModel,
-  responseModel,
+  wallPaperModel,
   wallPaperQuery,
+  providerModel
 };
