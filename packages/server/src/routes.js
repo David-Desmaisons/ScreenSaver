@@ -1,10 +1,16 @@
 const { responseModel, wallPaperQuery } = require("./model/contract");
 const { Finder } = require("./core/wallpaperFinder");
 const { loadProviders } = require("./core/loader");
+const Chance = require('chance');
+
+async function createFinder(){
+  const providers = await loadProviders();
+  const finder = new Finder(providers, new Chance());
+  return finder;
+}
 
 const routesProvider = async () => {
-  const providers = await loadProviders();
-  const finder = new Finder(providers);
+  const finder = await createFinder();
   return [
     {
       method: "GET",

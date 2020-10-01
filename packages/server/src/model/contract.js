@@ -6,27 +6,27 @@ const positionModel = Joi.object({
 }).label("Position");
 
 const locationModel = Joi.object({
-  title: Joi.string(),
-  city: Joi.string(),
-  country: Joi.string(),
-  position: positionModel.allow( null )
+  title: Joi.string().allow(""),
+  city: Joi.string().allow(""),
+  country: Joi.string().allow(""),
+  position: positionModel.allow(null),
 }).label("Location");
 
 const responseModel = Joi.object({
   url: Joi.string(),
-  description: Joi.string(),
-  photographer: Joi.string(),
+  description: Joi.string().allow(""),
+  photographer: Joi.string().allow(""),
   provider: Joi.string(),
-  location: locationModel.allow( null ),
+  location: locationModel.allow(null),
 }).label("Wallpaper");
 
 const wallPaperQuery = Joi.object({
-  forceRefresh: Joi.boolean().default(false)
+  forceRefresh: Joi.boolean().default(false),
 });
 
 module.exports = {
   positionModel,
   locationModel,
   responseModel,
-  wallPaperQuery
-}
+  wallPaperQuery,
+};

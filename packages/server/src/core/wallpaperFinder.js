@@ -1,14 +1,20 @@
-
 class Finder {
-  constructor(providers) {
+  constructor(providers, chance) {
     this.providers = providers;
+    this.chance = chance;
+    console.log("Chance:", chance.string());
+    console.log(
+      "Providers:",
+      providers.map((g) => g.name)
+    );
   }
 
-  getWallpaper({ forceRefresh = false }) {
-    const provider = this.providers[0];
+  getWallpaper({ forceRefresh = false } = {}) {
+    const { chance, providers } = this;
+    const { getWallpaper, name: provider } = chance.pickone(providers);
     return {
-      ...provider.getWallpaper({ forceRefresh }),
-      provider: provider.name,
+      ...getWallpaper({ forceRefresh, chance }),
+      provider,
     };
   }
 }

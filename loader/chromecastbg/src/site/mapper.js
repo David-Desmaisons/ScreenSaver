@@ -4,7 +4,7 @@ const {checkResource} = require("../utils/checkResource");
 async function mapper({url, name, photographer, location: rawLocation}){
   const success = await checkResource(url, "image/*");
   const location = rawLocation?  new Location({ title: rawLocation}) : null;
-  return success ? {url, name, photographer, location} : null;
+  return success ? {url, description: name, photographer, location} : null;
 }
 
 module.exports = {

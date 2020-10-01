@@ -32,7 +32,6 @@ async function loadProviders() {
   const getters = directories
     .map((directory) => safeLoadModule(rootPath, directory))
     .filter((getter) => !!getter);
-  console.log("Providers found:",getters.map(g => g.name));
   return getters;
 }
 
