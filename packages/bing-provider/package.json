@@ -1,7 +1,7 @@
 {
   "name": "bing",
   "version": "1.0.0",
-  "description": "",
+  "description": "bing provider",
   "main": "src/index.js",
   "scripts": {
   },

@@ -6,10 +6,10 @@ const readdirAsync = promisify(fs.readdir);
 
 function loadModule(directory) {
   const packagePath = path.join(directory, "package.json");
-  const { main, name, version } = require(packagePath);
+  const { main, name, version, description } = require(packagePath);
   const mainPath = path.join(directory, main);
   const { getWallpaper } = require(mainPath);
-  return getWallpaper ? { getWallpaper, name, version } : null;
+  return getWallpaper ? { getWallpaper, name, version, description } : null;
 }
 
 function safeLoadModule(rootPath, directory) {

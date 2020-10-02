@@ -41,7 +41,7 @@ const routesProvider = async () => {
         tags: ["api"],
         response: { schema: providersModel },
         handler() {
-          return providers.map(({ name, version }) => ({ name, version }));
+          return providers.map(({ name, version, description }) => ({ name, version, description }));
         },
       },
     },
