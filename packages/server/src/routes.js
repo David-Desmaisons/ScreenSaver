@@ -1,4 +1,4 @@
-const { wallPaperModel, providerModel, wallPaperQuery } = require("./model/contract");
+const { wallPaperModel, providersModel, wallPaperQuery } = require("./model/contract");
 const { Finder } = require("./core/wallpaperFinder");
 const { loadProviders } = require("./core/loader");
 const Chance = require('chance');
@@ -35,7 +35,7 @@ const routesProvider = async () => {
       path: "/providers",
       options: {
         tags: ["api"],
-        response: { schema: providerModel },
+        response: { schema: providersModel },
         handler() {
           return providers.map(({name, version}) => ({name, version}));
         },

@@ -25,15 +25,18 @@ const wallPaperQuery = Joi.object({
   provider: Joi.string().default(null)
 });
 
-const providerModel = Joi.array().items(Joi.object({
+const providerModel = Joi.object({
   name: Joi.string(),
   version: Joi.string()
-}));
+}).label("Provider");
+
+const providersModel = Joi.array().label("Providers").items(providerModel);
 
 module.exports = {
   positionModel,
   locationModel,
   wallPaperModel,
   wallPaperQuery,
-  providerModel
+  providerModel,
+  providersModel
 };
