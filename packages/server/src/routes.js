@@ -1,8 +1,13 @@
-const { wallPaperModel, providersModel, wallPaperQuery } = require("./model/contract");
+const {
+  wallPaperModel,
+  providersModel,
+  wallPaperQuery,
+} = require("./model/contract");
 const { Finder } = require("./core/wallpaperFinder");
 const { loadProviders } = require("./core/loader");
-const Chance = require('chance');
+const Chance = require("chance");
 const { ProviderNotFound } = require("./core/providerNotFound");
+const Boom = require("@hapi/boom");
 
 const routesProvider = async () => {
   const providers = await loadProviders();
@@ -17,13 +22,12 @@ const routesProvider = async () => {
         validate: {
           query: wallPaperQuery,
         },
-        handler(request, h) {
+        handler(request) {
           try {
             return finder.getWallpaper(request.query);
-          }
-          catch(error){
-            if (error instanceof ProviderNotFound){
-               return h.response(error.getMessage()).code(404);
+          } catch (error) {
+            if (error instanceof ProviderNotFound) {
+              throw Boom.notFound(error.getMessage());
             }
             throw error;
           }
@@ -37,16 +41,16 @@ const routesProvider = async () => {
         tags: ["api"],
         response: { schema: providersModel },
         handler() {
-          return providers.map(({name, version}) => ({name, version}));
+          return providers.map(({ name, version }) => ({ name, version }));
         },
       },
     },
     {
       method: "*",
       path: "/{any*}",
-      handler(request, h) {
+      handler(request) {
         console.log(`route: ${request.params.any} not found`);
-        return h.response("Resource Not Found!").code(404);
+        throw Boom.notFound("Resource Not Found!");
       },
     },
   ];
