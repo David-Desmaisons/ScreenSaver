@@ -44,7 +44,8 @@ const routesProvider = async () => {
     {
       method: "*",
       path: "/{any*}",
-      handler(_, h) {
+      handler(request, h) {
+        console.log(`route: ${request.params.any} not found`);
         return h.response("Resource Not Found!").code(404);
       },
     },
