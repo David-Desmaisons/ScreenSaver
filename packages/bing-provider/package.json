@@ -1,0 +1,13 @@
+{
+  "name": "bing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+  },
+  "author": "David Desmaisons",
+  "license": "MIT",
+  "dependencies": {
+    "got": "^11.7.0"
+  }
+}
