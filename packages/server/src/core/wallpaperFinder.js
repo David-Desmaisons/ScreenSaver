@@ -4,11 +4,7 @@ class Finder {
   constructor(providers, chance) {
     this.providers = providers;
     this.chance = chance;
-    console.log("Chance:", chance.string());
-    console.log(
-      "Providers:",
-      providers.map((g) => g.name)
-    );
+    console.log({chance: chance.string(), providers: providers.map((g) => g.name)});
   }
 
   _pickProvider(providerName) {
@@ -18,15 +14,16 @@ class Finder {
       : providers.find((p) => p.name === providerName);
   }
 
-  getWallpaper({ forceRefresh = false, provider: providerName = null } = {}) {
+  async getWallpaper({ forceRefresh = false, provider: providerName = null } = {}) {
     const { chance } = this;
     const foundProvider = this._pickProvider(providerName);
     if (!foundProvider) {
       throw new ProviderNotFound(providerName);
     }
     const { getWallpaper, name: provider } = foundProvider;
+    const wallPaper = await getWallpaper({ forceRefresh, chance });
     return {
-      ...getWallpaper({ forceRefresh, chance }),
+      ...wallPaper,
       provider,
     };
   }

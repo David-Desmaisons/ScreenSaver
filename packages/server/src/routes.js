@@ -22,9 +22,9 @@ const routesProvider = async () => {
         validate: {
           query: wallPaperQuery,
         },
-        handler(request) {
+        async handler(request) {
           try {
-            return finder.getWallpaper(request.query);
+            return await finder.getWallpaper(request.query);
           } catch (error) {
             if (error instanceof ProviderNotFound) {
               throw Boom.notFound(error.getMessage());

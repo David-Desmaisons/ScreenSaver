@@ -1,10 +1,9 @@
 const data = require("../data/wallpaper");
 
 const getWallpaper = ({
-    forceRefresh= false,
-    chance
+  chance
 }) => {
-    return chance.pickone(data);
+  return chance.pickone(data);
 }
 
 
