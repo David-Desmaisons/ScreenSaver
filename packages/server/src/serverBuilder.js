@@ -5,6 +5,9 @@ const buildServer = async (port = 3000) => {
   const server = Hapi.server({
     port,
     host: "localhost",
+    routes: {
+      cors: true,
+    },
   });
   const routes = await routesProvider();
   server.route(routes);
