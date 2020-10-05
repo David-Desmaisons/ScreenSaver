@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "bing provider",
   "main": "src/index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "author": "David Desmaisons",
   "license": "MIT",
   "dependencies": {

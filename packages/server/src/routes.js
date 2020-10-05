@@ -3,15 +3,12 @@ const {
   providersModel,
   wallPaperQuery,
 } = require("./model/contract");
-const { Finder } = require("./core/wallpaperFinder");
-const { loadProviders } = require("./core/loader");
-const Chance = require("chance");
 const { ProviderNotFound } = require("./core/providerNotFound");
 const Boom = require("@hapi/boom");
+const { bootstrapApplication } = require("./bootstrap");
 
 const routesProvider = async () => {
-  const providers = await loadProviders();
-  const finder = new Finder(providers, new Chance());
+  const { providers, finder } = await bootstrapApplication();
   return [
     {
       method: "GET",
@@ -41,7 +38,11 @@ const routesProvider = async () => {
         tags: ["api"],
         response: { schema: providersModel },
         handler() {
-          return providers.map(({ name, version, description }) => ({ name, version, description }));
+          return providers.map(({ name, version, description }) => ({
+            name,
+            version,
+            description,
+          }));
         },
       },
     },
@@ -49,7 +50,7 @@ const routesProvider = async () => {
       method: "*",
       path: "/{any*}",
       handler(request) {
-        console.log(`route: ${request.params.any} not found`);
+        console.log(`route: "${request.params.any}" not found`);
         throw Boom.notFound("Resource Not Found!");
       },
     },
