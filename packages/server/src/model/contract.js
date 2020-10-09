@@ -22,7 +22,8 @@ const wallPaperModel = Joi.object({
 
 const wallPaperQuery = Joi.object({
   forceRefresh: Joi.boolean().default(false),
-  provider: Joi.string().default(null)
+  lang: Joi.string().default("en-US"),
+  provider: Joi.string().default(null),
 });
 
 const providerModel = Joi.object({
@@ -39,5 +40,5 @@ module.exports = {
   wallPaperModel,
   wallPaperQuery,
   providerModel,
-  providersModel
+  providersModel,
 };

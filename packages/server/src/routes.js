@@ -12,7 +12,7 @@ const routesProvider = async () => {
   return [
     {
       method: "GET",
-      path: "/wallpaper",
+      path: "/wallpapers/random",
       options: {
         tags: ["api"],
         response: { schema: wallPaperModel },
@@ -27,7 +27,7 @@ const routesProvider = async () => {
               throw Boom.notFound(error.getMessage());
             }
             throw error;
-          }
+          } 
         },
       },
     },
