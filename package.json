@@ -8,10 +8,6 @@
     "doc": "cd ./packages/server & npm run doc"
   },
   "devDependencies": {
-    "lerna": "^3.20.2",
-    "pre-commit": "^1.2.2"
-  },
-  "pre-commit": [
-    "doc"
-  ]
+    "lerna": "^3.20.2"
+  }
 }
