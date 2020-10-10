@@ -1,0 +1,90 @@
+swagger: '2.0'
+host: 'localhost:3000'
+basePath: /
+schemes:
+  - http
+info:
+  title: screen-saver-server
+  version: 1.0.0
+tags: []
+paths:
+  /providers:
+    get:
+      operationId: getProviders
+      tags:
+        - providers
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Providers'
+          description: Successful
+  /wallpapers/random:
+    get:
+      operationId: getWallpapersRandom
+      parameters:
+        -
+          type: boolean
+          default: false
+          name: forceRefresh
+          in: query
+        -
+          type: string
+          default: en-US
+          name: lang
+          in: query
+        -
+          type: string
+          name: provider
+          in: query
+      tags:
+        - wallpapers
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Wallpaper'
+          description: Successful
+definitions:
+  Provider:
+    type: object
+    properties:
+      name:
+        type: string
+      version:
+        type: string
+      description:
+        type: string
+  Providers:
+    type: array
+    items:
+      $ref: '#/definitions/Provider'
+  Position:
+    type: object
+    properties:
+      latitude:
+        type: number
+      longitude:
+        type: number
+  Location:
+    type: object
+    properties:
+      title:
+        type: string
+      city:
+        type: string
+      country:
+        type: string
+      position:
+        $ref: '#/definitions/Position'
+  Wallpaper:
+    type: object
+    properties:
+      url:
+        type: string
+      description:
+        type: string
+      photographer:
+        type: string
+      provider:
+        type: string
+      location:
+        $ref: '#/definitions/Location'
