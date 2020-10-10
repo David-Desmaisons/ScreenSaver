@@ -1,13 +1,9 @@
 const { ProviderNotFound } = require("./providerNotFound");
 
 class Finder {
-  constructor(providers, chance) {
+  constructor({providers, chance}) {
     this.providers = providers;
     this.chance = chance;
-    console.log({
-      chance: chance.string(),
-      providers: providers.map((g) => g.name),
-    });
   }
 
   _pickProvider(providerName) {

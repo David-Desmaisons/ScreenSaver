@@ -1,34 +1,37 @@
 const Hapi = require("@hapi/hapi");
 const { routesProvider } = require("./routes");
+const { bootstrapApplication } = require("./bootstrap");
 
-const buildServer = async (port = 3000) => {
+const buildServer = async (bootstrap) => {
+  const configuration = await bootstrap();
   const server = Hapi.server({
-    port,
-    host: "localhost",
+    port: configuration.port,
+    host: configuration.host,
     routes: {
       cors: true,
     },
   });
-  const routes = await routesProvider();
+  const routes = routesProvider(configuration);
   server.route(routes);
   return server;
 };
 
-const setUpCompleteServer =  async (port) => {
+const setUpCompleteServer =  async (bootstrap = bootstrapApplication) => {
   const { addSwagger } = require("./swagger");
-  const server = await buildServer(port);
+  const server = await buildServer(bootstrap);
   await addSwagger(server);
   return server;
 };
 
 const startServer = async (port) => {
-  const server = await setUpCompleteServer(port);
+  const bootstrap = () => bootstrapApplication({port});
+  const server = await setUpCompleteServer(bootstrap);
   await server.start();
   return server;
 };
 
-const initServer = async () => {
-  const server = await setUpCompleteServer();
+const initServer = async (bootstrap) => {
+  const server = await setUpCompleteServer(bootstrap);
   await server.initialize();
   return server;
 };
