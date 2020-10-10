@@ -1,8 +1,8 @@
-const { createServer } = require("./serverBuilder");
+const { startServer } = require("./serverBuilder");
 const { resilient } = require("./utils/resilient");
 
 const init = async () => {
-  const server = await resilient((tentative) => createServer(tentative + 3000), 10);
+  const server = await resilient((tentative) => startServer(tentative + 3000), 10);
   if (server === null) {
     console.log("Unable to run server");
     return;

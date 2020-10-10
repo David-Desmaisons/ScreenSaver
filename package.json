@@ -1,7 +1,17 @@
 {
   "name": "root",
   "private": true,
+  "scripts": {
+    "test": "lerna run test",
+    "start": "cd ./packages/server & npm start",
+    "serve": "cd ./packages/server & npm serve",
+    "doc": "cd ./packages/server & npm run doc"
+  },
   "devDependencies": {
-    "lerna": "^3.20.2"
-  }
+    "lerna": "^3.20.2",
+    "pre-commit": "^1.2.2"
+  },
+  "pre-commit": [
+    "doc"
+  ]
 }

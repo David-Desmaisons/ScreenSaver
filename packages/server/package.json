@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "start": "npx nodemon src/server.js",
-    "test": "jest"
+    "serve": "node src/server.js",
+    "doc": "node src/createYaml.js",
+    "test": "lerna run test"
   },
   "repository": {
     "type": "git",
@@ -27,6 +29,7 @@
     "joi": "^17.2.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "yamljs": "^0.3.0"
   }
 }

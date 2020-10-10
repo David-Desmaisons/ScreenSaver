@@ -14,21 +14,27 @@ const buildServer = async (port = 3000) => {
   return server;
 };
 
-const createServer = async (port) => {
+const setUpCompleteServer =  async (port) => {
   const { addSwagger } = require("./swagger");
   const server = await buildServer(port);
   await addSwagger(server);
+  return server;
+};
+
+const startServer = async (port) => {
+  const server = await setUpCompleteServer(port);
   await server.start();
   return server;
 };
 
-const initServer = async (port) => {
-  const server = await buildServer(port);
-  await server.init();
+const initServer = async () => {
+  const server = await setUpCompleteServer();
+  await server.initialize();
   return server;
 };
 
 module.exports = {
-  createServer,
+  buildServer,
+  startServer,
   initServer,
 };
