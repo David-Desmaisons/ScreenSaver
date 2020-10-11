@@ -5,11 +5,12 @@ const Chance = require("chance");
 const bootstrapApplication = async ({
   port = 3000,
   host = "localhost",
+  chance : providedChance = null,
   logger : providedLogger = null
 } = {}) => {
   const logger = providedLogger || console;
+  const chance = providedChance || new Chance();
   const providers = await loadProviders();
-  const chance = new Chance();
   const finder = new Finder({providers, chance});
   logger.log({
     chance: chance.string(),
