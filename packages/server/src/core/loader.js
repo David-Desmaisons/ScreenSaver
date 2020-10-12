@@ -8,8 +8,11 @@ function loadModule(directory) {
   const packagePath = path.join(directory, "package.json");
   const { main, name, version, description } = require(packagePath);
   const mainPath = path.join(directory, main);
-  const { getWallpaper } = require(mainPath);
-  return getWallpaper ? { getWallpaper, name, version, description } : null;
+  const { getWallpaper, plugins: foundPlugins } = require(mainPath);
+  const plugins = { addRoutes: () => [], ...foundPlugins };
+  return getWallpaper
+    ? { getWallpaper, plugins, name, version, description }
+    : null;
 }
 
 function safeLoadModule(rootPath, directory) {
