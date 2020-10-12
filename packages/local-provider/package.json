@@ -9,6 +9,8 @@
   "author": "David Desmaisons",
   "license": "MIT",
   "dependencies": {
-    "dotenv": "^8.2.0"
+    "@hapi/boom": "^9.1.0",
+    "dotenv": "^8.2.0",
+    "joi": "^17.2.1"
   }
 }
