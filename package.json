@@ -2,9 +2,10 @@
   "name": "root",
   "private": true,
   "scripts": {
+    "bootstrap": "lerna exec npm install",
     "test": "lerna run test",
-    "start": "cd ./packages/server & npm start",
-    "serve": "cd ./packages/server & npm serve",
+    "start": "cd ./packages/server & npm run start",
+    "serve": "cd ./packages/server & npm run serve",
     "doc": "cd ./packages/server & npm run doc"
   },
   "devDependencies": {
