@@ -1,8 +1,10 @@
 const fs = require("fs");
 
 const configuration = {
-  rootDirectory: process.env.directory,
+  rootDirectory: process.env.rootDirectory,
 };
+
+console.log({configuration});
 
 function getConfiguration() {
   return configuration;
