@@ -1,0 +1,30 @@
+{
+  "name": "web-ui",
+  "version": "0.0.0",
+  "description": "",
+  "author": "David-Desmaisons <desmaisons_david@hotmail.com>",
+  "homepage": "https://github.com/David-Desmaisons/ScreenSaver#readme",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/David-Desmaisons/ScreenSaver.git"
+  },
+  "scripts": {
+    "start": "nodemon --exec \"http-server\""
+  },
+  "bugs": {
+    "url": "https://github.com/David-Desmaisons/ScreenSaver/issues"
+  },
+  "devDependencies": {
+    "http-server": "^0.12.3",
+    "nodemon": "^2.0.9"
+  }
+}
