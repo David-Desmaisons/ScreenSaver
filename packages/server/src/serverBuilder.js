@@ -11,6 +11,8 @@ const buildServer = async (bootstrap) => {
       cors: true,
     },
   });
+  const registers = configuration.providers.map(({plugins}) => plugins.onServer(server));
+  await Promise.all(registers);
   const routes = routesProvider(configuration);
   server.route(routes);
   return server;

@@ -26,10 +26,11 @@
 <body>
     <div id="main"></div>
     <script type="module">
+        import * as query from "./js/application/query.js";
         import {runApp} from "./js/app.js";
         window.onload = () => {
             const element = document.getElementById('main');
-            runApp(element);
+            runApp({element, query});
         }      
     </script>
 </body>

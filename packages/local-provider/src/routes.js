@@ -1,10 +1,14 @@
-const { localProviderOption } = require("./model/contract");
-const { getConfiguration, setConfiguration } = require("./core/configuration");
+const {
+  localProviderOption
+} = require("./model/contract");
+const {
+  getConfiguration,
+  setConfiguration
+} = require("./core/configuration");
 const Boom = require("@hapi/boom");
 
-function addRoutes({ logger }) {
-  return [
-    {
+function addRoutes() {
+  return [{
       path: "options",
       method: "GET",
       options: {
@@ -32,13 +36,21 @@ function addRoutes({ logger }) {
           try {
             await setConfiguration(request.payload);
             return getConfiguration();
+          } catch {
+            throw Boom.badRequest();
           }
-         catch {
-           throw Boom.badRequest();
-         }
         },
       },
     },
+    {
+      method: 'GET',
+      path: 'images/{param*}',
+      handler: {
+        directory: {
+          path: getConfiguration().rootDirectory
+        }
+      }
+    }
   ];
 }
 

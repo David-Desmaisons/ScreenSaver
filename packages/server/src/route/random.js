@@ -6,7 +6,9 @@ const {
     exceptionMapper
 } = require("./helper/exceptionMapper");
 
-const getRandom = ({ finder }) => ({
+const getRandom = ({
+    finder
+}) => ({
     method: "GET",
     options: {
         tags: ["api"],
@@ -17,7 +19,10 @@ const getRandom = ({ finder }) => ({
             query: wallPaperQuery,
         },
         handler(request) {
-            return exceptionMapper(() => finder.getWallpaper(request.query));
+            return exceptionMapper(() => finder.getWallpaper({
+                ...request.query,
+                server: request.server
+            }));
         },
     },
 })

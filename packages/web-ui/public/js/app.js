@@ -1,18 +1,27 @@
 import {
-    getImageInfo
-} from "./infra/get.js";
-import {
     options
 } from "./config.js";
 
-async function updateImage(element) {
-    const info = await getImageInfo();
+async function updateImage({
+    element,
+    getRandomImageInfo
+}) {
+    const info = await getRandomImageInfo();
     element.style["background-image"] = `url(${info.url})`;
 }
 
-function runApp(element) {
+function runApp({
+    element,
+    query
+}) {
     element.classList.add("cover");
-    const update = () => updateImage(element);
+    const {
+        getRandomImageInfo
+    } = query;
+    const update = () => updateImage({
+        element,
+        getRandomImageInfo
+    });
     update();
     setInterval(update, options.refreshInMinutes * 60 * 1000)
 }

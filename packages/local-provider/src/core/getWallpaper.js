@@ -10,12 +10,12 @@ function filter(file) {
   return [".jpg", ".jfif", ".jpeg"].includes(extension);
 }
 
-async function getWallpaper({ chance, directory }) {
+async function getWallpaper({ chance, directory, server }) {
   const rootDirectory = directory || getConfiguration().rootDirectory;
   const files = await readdirAsync(rootDirectory);
   const file = chance.pickone(files.filter(filter));
   return {
-    url: url.pathToFileURL(path.join(rootDirectory, file)).href,
+    url: `${server.info.uri}/provider/local/images/${file}`,
     description: "",
     photographer: "",
     location: null,

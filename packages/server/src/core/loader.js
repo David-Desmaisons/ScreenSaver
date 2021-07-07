@@ -1,18 +1,37 @@
 const fs = require("fs");
 const path = require("path");
-const { promisify } = require("util");
+const {
+  promisify
+} = require("util");
 
 const readdirAsync = promisify(fs.readdir);
 
 function loadModule(directory) {
   const packagePath = path.join(directory, "package.json");
-  const { main, name, version, description } = require(packagePath);
+  const {
+    main,
+    name,
+    version,
+    description
+  } = require(packagePath);
   const mainPath = path.join(directory, main);
-  const { getWallpaper, plugins: foundPlugins } = require(mainPath);
-  const plugins = { addRoutes: () => [], ...foundPlugins };
-  return getWallpaper
-    ? { getWallpaper, plugins, name, version, description }
-    : null;
+  const {
+    getWallpaper,
+    plugins: foundPlugins
+  } = require(mainPath);
+  const plugins = {
+    addRoutes: () => [],
+    onServer: () => {},
+    ...foundPlugins
+  };
+  return getWallpaper ? {
+      getWallpaper,
+      plugins,
+      name,
+      version,
+      description
+    } :
+    null;
 }
 
 function safeLoadModule(rootPath, directory) {
@@ -28,7 +47,9 @@ function safeLoadModule(rootPath, directory) {
 async function loadProviders() {
   const rootPath = path.join(__dirname, "../../../");
 
-  const files = await readdirAsync(rootPath, { withFileTypes: true });
+  const files = await readdirAsync(rootPath, {
+    withFileTypes: true
+  });
   const directories = files.filter(
     (f) => f.isDirectory() && /-provider$/.test(f.name)
   );
