@@ -4,23 +4,28 @@ import {
 
 async function updateImage({
     element,
-    getRandomImageInfo
+    command,
+    query
 }) {
-    const info = await getRandomImageInfo();
-    element.style["background-image"] = `url(${info.url})`;
+    const info = await query.getRandomImageInfo();
+    await command.updateBackgroundImage(element, info.url);
+}
+
+function prepareDom(element) {
+    element.classList.add("cover");
 }
 
 function runApp({
     element,
+    command,
     query
 }) {
-    element.classList.add("cover");
-    const {
-        getRandomImageInfo
-    } = query;
+    prepareDom(element);
+    command.requestFullScreen();
     const update = () => updateImage({
         element,
-        getRandomImageInfo
+        command,
+        query
     });
     update();
     setInterval(update, options.refreshInMinutes * 60 * 1000)
