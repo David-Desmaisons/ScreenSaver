@@ -1,7 +1,9 @@
 import {
     requestFullScreen,
-    updateBackgroundImage
-} from "../dom/utils.js"
+} from "../dom/requestFullScreen.js"
+import {
+    updateBackgroundImage,
+} from "../dom/updateBackgroundImage.js"
 
 export {
     requestFullScreen,
