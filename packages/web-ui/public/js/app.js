@@ -9,6 +9,7 @@ async function updateImage({
 }) {
     const info = await query.getRandomImageInfo();
     await command.updateBackgroundImage(element, info.url);
+    element.classList.remove("loading");
 }
 
 function prepareDom(element) {
