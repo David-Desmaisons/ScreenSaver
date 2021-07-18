@@ -18,7 +18,8 @@
     "url": "git+https://github.com/David-Desmaisons/ScreenSaver.git"
   },
   "scripts": {
-    "start": "nodemon --exec \"http-server\""
+    "start": "nodemon --exec \"http-server\"",
+    "serve": "http-server"
   },
   "bugs": {
     "url": "https://github.com/David-Desmaisons/ScreenSaver/issues"
