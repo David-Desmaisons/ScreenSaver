@@ -1,4 +1,4 @@
-const data = require("../data/wallpaper");
+const data = require("../data/wallpaper.JSON");
 
 const getWallpaper = ({
   chance
