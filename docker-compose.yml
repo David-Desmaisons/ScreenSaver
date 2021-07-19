@@ -1,8 +1,16 @@
 version: "3.9"  # optional since v1.27.0
 services:
   server:
-    build: .
+    build:
+        context: .
+        dockerfile: Dockerfile-server
     ports:
       - "3000:3000"
     volumes:
-      - "/mnt/c/Users/David.Desmaisons/Pictures/wallpaper/Photo:/usr/src/app/images"
+      - "/mnt/c/Users/David.Desmaisons/Pictures/wallpaper/Photo:/usr/src/app/images:rw"
+  ui:
+    build:
+        context: .
+        dockerfile: Dockerfile-ui
+    ports:
+        - "8090:80"
