@@ -1,11 +1,6 @@
-const data = require("../data/wallpaper.JSON");
+const data = require("../data/wallpaper.json");
 
-const getWallpaper = ({
-  chance
-}) => {
-  return chance.pickone(data);
-}
-
+const getWallpaper = ({ chance}) => chance.pickone(data);
 
 module.exports = {
   getWallpaper

@@ -4,7 +4,7 @@ const Chance = require("chance");
 
 const bootstrapApplication = async ({
   port = 3000,
-  host = "localhost",
+  host = process.env.BASE_URL,
   chance : providedChance = null,
   logger : providedLogger = null
 } = {}) => {

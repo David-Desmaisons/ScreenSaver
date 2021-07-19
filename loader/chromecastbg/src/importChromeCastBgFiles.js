@@ -22,7 +22,7 @@ async function readData(data, callback) {
 
 function getDestination() {
   const { outputFile } = process.env;
-  const destinationPath = path.resolve(`./output/${outputFile}.JSON`);
+  const destinationPath = path.resolve(`./output/${outputFile}.json`);
   return fs.createWriteStream(destinationPath);
 }
 

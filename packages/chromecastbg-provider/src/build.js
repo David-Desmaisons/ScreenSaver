@@ -7,8 +7,8 @@ const {
 const copyAsync = promisify(fs.copyFile);
 
 async function transferFile() {
-    const source = path.join(__dirname,"../../../loader/chromecastbg/output/result.JSON" );
-    const destination = path.join(__dirname,"../data/wallpaper.JSON");
+    const source = path.join(__dirname,"../../../loader/chromecastbg/output/result.json" );
+    const destination = path.join(__dirname,"../data/wallpaper.json");
     await copyAsync(source, destination);
 }
 

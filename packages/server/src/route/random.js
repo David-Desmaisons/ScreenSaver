@@ -21,7 +21,7 @@ const getRandom = ({
         handler(request) {
             return exceptionMapper(() => finder.getWallpaper({
                 ...request.query,
-                server: request.server
+                host: request.url.origin
             }));
         },
     },

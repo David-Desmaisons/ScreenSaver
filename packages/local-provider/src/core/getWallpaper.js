@@ -1,6 +1,5 @@
 const path = require("path");
 const fs = require("fs");
-const url = require("url");
 const { promisify } = require("util");
 const readdirAsync = promisify(fs.readdir);
 const { getConfiguration } = require("./configuration");
@@ -10,12 +9,12 @@ function filter(file) {
   return [".jpg", ".jfif", ".jpeg"].includes(extension);
 }
 
-async function getWallpaper({ chance, directory, server }) {
+async function getWallpaper({ chance, directory, host }) {
   const rootDirectory = directory || getConfiguration().rootDirectory;
   const files = await readdirAsync(rootDirectory);
   const file = chance.pickone(files.filter(filter));
   return {
-    url: `${server.info.uri}/provider/local/images/${file}`,
+    url: `${host}/provider/local/images/${file}`,
     description: "",
     photographer: "",
     location: null,

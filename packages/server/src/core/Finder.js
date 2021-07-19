@@ -18,7 +18,7 @@ class Finder {
   }
 
   async getWallpaper({
-    server,
+    host,
     forceRefresh = false,
     provider: providerName = null,
     lang = "en-US",
@@ -29,7 +29,7 @@ class Finder {
       throw new ProviderNotFound(providerName);
     }
     const { getWallpaper, name: provider } = foundProvider;
-    const wallPaper = await getWallpaper({ forceRefresh, chance, lang, server });
+    const wallPaper = await getWallpaper({ forceRefresh, chance, lang, host });
     return {
       ...wallPaper,
       provider,

@@ -1,0 +1,8 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  server:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - "/mnt/c/Users/David.Desmaisons/Pictures/wallpaper/Photo:/usr/src/app/images"

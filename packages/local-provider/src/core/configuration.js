@@ -1,7 +1,7 @@
 const fs = require("fs");
 
 const configuration = {
-  rootDirectory: process.env.rootDirectory,
+  rootDirectory: process.env.IMAGE_DIRECTORY,
 };
 
 console.log({configuration});
