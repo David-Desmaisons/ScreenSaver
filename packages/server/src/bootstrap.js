@@ -3,7 +3,7 @@ const { loadProviders } = require("./core/loader");
 const Chance = require("chance");
 
 const bootstrapApplication = async ({
-  port = 3000,
+  port = 3050,
   host = process.env.BASE_URL,
   chance : providedChance = null,
   logger : providedLogger = null
