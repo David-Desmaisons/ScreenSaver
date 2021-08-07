@@ -8,6 +8,7 @@
     "serve:api": "cd ./packages/server & npm run serve",
     "start:ui": "cd ./packages/web-ui & npm run start",
     "start": "concurrently \"npm run start:api\" \"npm run start:ui\"",
+    "run:docker": "docker-compose up",
     "doc": "cd ./packages/server & npm run doc"
   },
   "devDependencies": {
