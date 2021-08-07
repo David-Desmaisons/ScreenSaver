@@ -1,4 +1,4 @@
-const { checkResource } = require("../../src/utils/checkResource");
+const { checkResource } = require("../../../src/loader/utils/checkResource");
 
 describe("checkResource", () => {
   test.each([
