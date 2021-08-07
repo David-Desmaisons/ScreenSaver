@@ -20,20 +20,20 @@ async function readData(data, callback) {
   callback(null, mapped);
 }
 
-function getDestination() {
+function getDestination(destination = null) {
   const { outputFile } = process.env;
-  const destinationPath = path.resolve(`./data/${outputFile}.json`);
+  const destinationPath = destination || path.resolve(`./data/${outputFile}.json`);
   console.log({destinationPath});
   return fs.createWriteStream(destinationPath);
 }
 
-async function importer() {
+async function importer(destination = null) {
   await pipeline(
     getStream(),
     JSONStream.parse("*"),
     es.map(readData),
     getSerializerStream(),
-    getDestination()
+    getDestination(destination)
   );
   console.log("done");
 }
