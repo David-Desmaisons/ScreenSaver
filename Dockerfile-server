@@ -26,7 +26,7 @@ RUN mkdir ./images
 
 WORKDIR /usr/src/app/packages/server
 
-EXPOSE 3000
+EXPOSE 3050
 
 ENV BASE_URL=0.0.0.0
 ENV IMAGE_DIRECTORY=/usr/src/app/images/
