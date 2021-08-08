@@ -3,7 +3,7 @@ services:
   server:
     build:
         context: .
-        dockerfile: Dockerfile-server
+        dockerfile: Dockerfile.server
     ports:
       - "3050:3050"
     volumes:
@@ -11,6 +11,6 @@ services:
   ui:
     build:
         context: .
-        dockerfile: Dockerfile-ui
+        dockerfile: Dockerfile.ui
     ports:
         - "8090:80"
