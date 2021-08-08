@@ -20,6 +20,7 @@
     "url": "https://github.com/David-Desmaisons/ScreenSaver/issues"
   },
   "dependencies": {
+    "dotenv": "^10.0.0",
     "jsdom": "^16.7.0",
     "node-fetch": "^2.6.1",
     "stream-buffers": "^3.0.2"

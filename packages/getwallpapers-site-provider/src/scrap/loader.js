@@ -20,7 +20,7 @@ async function getContent(stream) {
 async function load(url) {
     const response = await fetch(url);
     const dataBuffer = await getContent(response.body);
-    return new JSDOM(dataBuffer).window;
+    return new JSDOM(dataBuffer).window.document;
 }
 
 module.exports = {
