@@ -35,12 +35,19 @@ async function* getCollectionFromCategory({
     });
 }
 
-function getImagesFromCollection({
+async function* getImagesFromCollection({
     url: urlParameter,
     name
 }) {
-    const url = urlParameter || process.env.categoryUrl.replace("{category}", name);
-    return null;
+    const url = urlParameter || process.env.collectionUrl.replace("{collection}", name);
+    const document = await load(url);
+    const links = document.querySelectorAll("img.thumb.ads_popup[data-srcset]");
+    for (const link of links) {
+        yield {
+            name: link.attributes.alt.value,
+            url: link.dataset.srcset
+        }
+    }
 }
 
 module.exports = {
