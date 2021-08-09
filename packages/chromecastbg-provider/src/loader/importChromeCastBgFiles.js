@@ -23,7 +23,6 @@ async function readData(data, callback) {
 function getDestination(destination = null) {
   const { outputFile } = process.env;
   const destinationPath = destination || path.resolve(`./data/${outputFile}.json`);
-  console.log({destinationPath});
   return fs.createWriteStream(destinationPath);
 }
 
