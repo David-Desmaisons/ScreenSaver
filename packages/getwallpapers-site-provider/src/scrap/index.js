@@ -1,11 +1,24 @@
+require("dotenv").config();
+
 const {
-    getCategories
-} = require('./analyser');
+    scrapCategoryToFile
+} = require("./scrapper");
+const {
+    getPerformanceLogger
+} = require("../utils/perfLogger");
 
 (async function () {
     console.log("scrapping");
-    for await (const category of getCategories()) {
-        console.log(category);
-    }
-    console.log("done");
+
+    const perfLogger = getPerformanceLogger("scrapping");
+
+    await scrapCategoryToFile({
+        category: {
+            name: "cartoon"
+        }
+    });
+
+    perfLogger();
+
+    console.log(`Done`);
 })()

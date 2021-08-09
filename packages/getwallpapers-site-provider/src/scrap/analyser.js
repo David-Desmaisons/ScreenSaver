@@ -15,15 +15,18 @@ async function* getCategories() {
 
 async function* getCollectionFromCategory({
     url: urlParameter,
-    name
+    name,
+    category: categoryParameter= null
 }) {
     const url = urlParameter || process.env.categoryUrl.replace("{category}", name);
+    const category = categoryParameter || name || urlParameter;
     const document = await load(url);
     const links = document.querySelectorAll("div.column.collection_thumb a.ui.fluid.image[title][href]");
     for (const link of links) {
         yield {
             name: link.attributes.title.value,
-            url: link.attributes.href.value
+            url: link.attributes.href.value,
+            category
         }
     }
     const next = document.querySelector("div.stage[data-end='0'][data-resource]");
@@ -31,7 +34,8 @@ async function* getCollectionFromCategory({
         return;
     }
     yield* getCollectionFromCategory({
-        url: next.dataset.resource
+        url: next.dataset.resource,
+        category
     });
 }
 
@@ -45,7 +49,8 @@ async function* getImagesFromCollection({
     for (const link of links) {
         yield {
             name: link.attributes.alt.value,
-            url: link.dataset.srcset
+            url: link.dataset.srcset,
+            collection: name || urlParameter
         }
     }
 }
