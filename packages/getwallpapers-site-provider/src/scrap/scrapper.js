@@ -12,17 +12,6 @@ const {
     getSerializerConsumer
 } = require('../utils/streamHelper');
 
-async function* scrapCategory(options) {
-    for await (const collection of getCollectionFromCategory(options)) {
-        for await (const images of getImagesFromCollection(collection)) {
-            yield {
-                url: images.url,
-                description: `${images.name}; ${collection.name}${options.name ? `; ${options.name}`: ''}`,
-            }
-        }
-    }
-}
-
 function scrapCategoryToStream(options) {
     return _(Readable.from(getCollectionFromCategory(options)))
         .flatMap(collection => _(Readable.from(getImagesFromCollection(collection))))
@@ -44,7 +33,6 @@ async function scrapCategoryToFile({
 }
 
 module.exports = {
-    scrapCategory,
     scrapCategoryToStream,
     scrapCategoryToFile
 }

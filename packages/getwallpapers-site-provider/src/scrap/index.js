@@ -14,7 +14,7 @@ const {
 
     await scrapCategoryToFile({
         category: {
-            name: "cartoon"
+            name: "nature"
         }
     });
 
