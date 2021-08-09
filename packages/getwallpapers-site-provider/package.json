@@ -22,7 +22,7 @@
   "dependencies": {
     "dotenv": "^10.0.0",
     "highland": "^2.13.5",
-    "jsdom": "^16.7.0",
+    "linkedom": "^0.11.1",
     "node-fetch": "^2.6.1",
     "stream-buffers": "^3.0.2"
   }

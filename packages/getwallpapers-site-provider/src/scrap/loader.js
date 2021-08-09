@@ -6,10 +6,9 @@ const {
     promisify
 } = require('util');
 const pipeline = promisify(require('stream').pipeline);
-const jsdom = require("jsdom");
 const {
-    JSDOM
-} = jsdom;
+    parseHTML
+} = require('linkedom');
 
 async function getContent(stream) {
     const buffer = new WritableStreamBuffer();
@@ -20,7 +19,7 @@ async function getContent(stream) {
 async function load(url) {
     const response = await fetch(url);
     const dataBuffer = await getContent(response.body);
-    return new JSDOM(dataBuffer).window.document;
+    return parseHTML(dataBuffer).document;
 }
 
 module.exports = {

@@ -2,16 +2,6 @@ const fs = require("fs");
 const path = require("path");
 const _ = require("highland");
 
-function highlandAsPromise(stream) {
-    return new Promise((resolve, reject) => {
-        try {
-            stream.done(resolve);
-        } catch (error) {
-            reject(error);
-        }
-    });
-}
-
 function asPromise(stream) {
     return new Promise((resolve, reject) => {
         stream.on("error", (err) => {
@@ -52,7 +42,6 @@ function getSerializerConsumer() {
 }
 
 module.exports = {
-    highlandAsPromise,
     asPromise,
     getDestinationStream,
     getSerializerConsumer
