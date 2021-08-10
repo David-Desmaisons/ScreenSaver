@@ -2,37 +2,39 @@ const {
     getImagesFromCollection,
     getCollectionFromCategory
 } = require('./analyser');
-const _ = require("highland");
 const {
-    Readable
-} = require('stream');
-const {
-    asPromise,
-    getDestinationStream,
-    getSerializerConsumer
+    writeStream,
+    getHighlandStreamFromGenerator
 } = require('../utils/streamHelper');
+const _ = require("highland");
 
 function scrapCategoryToStream(options) {
-    return _(Readable.from(getCollectionFromCategory(options)))
-        .flatMap(collection => _(Readable.from(getImagesFromCollection(collection))))
+    return getHighlandStreamFromGenerator(getCollectionFromCategory(options))
+        .flatMap(collection => getHighlandStreamFromGenerator(getImagesFromCollection(collection)))
         .map(image => ({
             url: image.url,
-            description: `${image.name}; ${image.collection}${options.name ? `; ${options.name}`: ''}`
+            description: image.name,
+            tags: [image.collection, options.name]
         }));
 }
 
-async function scrapCategoryToFile({
+function scrapCategoryToFile({
     category,
     destination = null
 }) {
-    const stream = scrapCategoryToStream(category)
-        .consume(getSerializerConsumer())
-        .pipe(getDestinationStream(destination));
+    return writeStream(scrapCategoryToStream(category), destination);
+}
 
-    await asPromise(stream);
+function scrapCategoriesToFile({
+    categories,
+    destination = null
+}) {
+    const stream = _(categories).flatMap(scrapCategoryToStream);
+    return writeStream(stream, destination);
 }
 
 module.exports = {
     scrapCategoryToStream,
-    scrapCategoryToFile
+    scrapCategoryToFile,
+    scrapCategoriesToFile
 }

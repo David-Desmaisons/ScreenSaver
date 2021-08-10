@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 const {
-    scrapCategoryToFile
+    scrapCategoriesToFile
 } = require("./scrapper");
 const {
     getPerformanceLogger
@@ -12,10 +12,12 @@ const {
 
     const perfLogger = getPerformanceLogger("scrapping");
 
-    await scrapCategoryToFile({
-        category: {
+    await scrapCategoriesToFile({
+        categories: [{
             name: "nature"
-        }
+        }, {
+            name: "city"
+        }]
     });
 
     perfLogger();

@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const _ = require("highland");
+const { Readable } = require("stream");
 
 function asPromise(stream) {
     return new Promise((resolve, reject) => {
@@ -11,6 +12,10 @@ function asPromise(stream) {
             resolve();
         });
     });  
+}
+
+function getHighlandStreamFromGenerator(generator) {
+    return _(Readable.from(generator));
 }
 
 function getDestinationStream(destination = null) {
@@ -41,8 +46,18 @@ function getSerializerConsumer() {
     };
 }
 
+async function writeStream(readStream, destination) {
+    const stream = readStream
+        .consume(getSerializerConsumer())
+        .pipe(getDestinationStream(destination));
+
+    await asPromise(stream);
+}
+
 module.exports = {
     asPromise,
+    getHighlandStreamFromGenerator,
     getDestinationStream,
-    getSerializerConsumer
+    getSerializerConsumer,
+    writeStream
 }
