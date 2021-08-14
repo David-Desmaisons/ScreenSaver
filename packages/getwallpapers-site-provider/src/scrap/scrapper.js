@@ -8,8 +8,8 @@ const {
 } = require('../utils/streamHelper');
 const _ = require("highland");
 
-function scrapCategoryToStream(options) {
-    return getHighlandStreamFromGenerator(getCollectionFromCategory(options))
+function scrapCategoryToStream(category) {
+    return getHighlandStreamFromGenerator(getCollectionFromCategory(category))
         .flatMap(collection => getHighlandStreamFromGenerator(getImagesFromCollection(collection)))
         .map(image => ({
             url: image.url,

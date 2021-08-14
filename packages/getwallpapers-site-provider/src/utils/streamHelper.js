@@ -55,9 +55,6 @@ async function writeStream(readStream, destination) {
 }
 
 module.exports = {
-    asPromise,
     getHighlandStreamFromGenerator,
-    getDestinationStream,
-    getSerializerConsumer,
     writeStream
 }

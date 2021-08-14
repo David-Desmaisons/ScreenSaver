@@ -10,6 +10,7 @@ COPY package*.json ./
 COPY packages/bing-provider/package*.json ./packages/bing-provider/
 COPY packages/chromecastbg-provider/package*.json ./packages/chromecastbg-provider/
 COPY packages/local-provider/package*.json ./packages/local-provider/
+COPY packages/getwallpapers-site-provider/package*.json ./packages/getwallpapers-site-provider/
 COPY packages/server/package*.json ./packages/server/
 COPY lerna.json ./
 
