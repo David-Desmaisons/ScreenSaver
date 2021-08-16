@@ -1,6 +1,6 @@
 import {
     options
-} from "./config.js";
+} from "./config.mjs";
 
 async function updateImage({
     element,

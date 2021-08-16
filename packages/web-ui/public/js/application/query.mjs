@@ -1,6 +1,6 @@
 import {
     config
-} from "../config/index.js"
+} from "../config/index.mjs"
 
 function get(path) {
     return fetch(`${config.baseUrl}/${path}`);

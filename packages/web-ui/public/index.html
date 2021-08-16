@@ -26,9 +26,9 @@
 <body>
     <div id="main" class="loading"></div>
     <script type="module">
-        import * as query from "./js/application/query.js";
-        import * as command from "./js/application/command.js";
-        import { runApp } from "./js/app.js";
+        import * as query from "./js/application/query.mjs";
+        import * as command from "./js/application/command.mjs";
+        import { runApp } from "./js/app.mjs";
         window.onload = () => {
             const element = document.getElementById('main');
             runApp({element, query, command});

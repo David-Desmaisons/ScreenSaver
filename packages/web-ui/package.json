@@ -18,14 +18,13 @@
     "url": "git+https://github.com/David-Desmaisons/ScreenSaver.git"
   },
   "scripts": {
-    "start": "nodemon --exec \"http-server\"",
-    "serve": "http-server"
+    "start": "web-dev-server --node-resolve --app-index public/index.html --watch --open",
+    "serve": "web-dev-server --node-resolve --open"
   },
   "bugs": {
     "url": "https://github.com/David-Desmaisons/ScreenSaver/issues"
   },
   "devDependencies": {
-    "http-server": "^0.12.3",
-    "nodemon": "^2.0.9"
+    "@web/dev-server": "^0.1.21"
   }
 }
