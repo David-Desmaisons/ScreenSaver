@@ -1,0 +1,39 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Screen saver</title>
+    <meta name="description" content="Screen saver components.">
+    <meta name="author" content="David Desmaisons">
+
+    <meta property="og:title" content="Screen saver">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="Screen saver components.">
+    <meta property="og:image" content="image.png">
+
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/styles.css?v=1.0">
+    <link rel="stylesheet" href="css/styles.dev.css?v=1.0">
+</head>
+
+<body>
+    <div id="loader" class="loadable loading">
+    </div>
+
+    <image-presenter id="presenter" url="https://getwallpapers.com/wallpaper/full/6/2/8/39391.jpg">
+    </image-presenter>
+
+    <script type="module">
+        import * as _ from "./js/components/imagePresenter.js";
+    </script>
+</body>
+
+</html>

@@ -18,8 +18,9 @@
     "url": "git+https://github.com/David-Desmaisons/ScreenSaver.git"
   },
   "scripts": {
+    "dev": "web-dev-server --node-resolve --app-index public/components.html --watch --open",
     "start": "web-dev-server --node-resolve --app-index public/index.html --watch --open",
-    "serve": "web-dev-server --node-resolve --open"
+    "serve": "web-dev-server --node-resolve --app-index public/index.html --open"
   },
   "bugs": {
     "url": "https://github.com/David-Desmaisons/ScreenSaver/issues"
