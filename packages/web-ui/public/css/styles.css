@@ -31,20 +31,24 @@ body {
     transition: background-image 0.2s ease-in-out;
 }
 
-#main.loading::before,
-#main.loading::after {
+.loadable {
+    position: relative;
+}
+
+.loading::before,
+.loading::after {
     content: '';
-    position: fixed;
+    position: absolute;
     z-index: 1000;
 }
 
-#main.loading::before {
+.loading::before {
     top: 0;
     left: 0;
     background: var(--color-bg);
 }
 
-#main.loading::after {
+.loading::after {
     top: 50%;
     left: 50%;
     width: 60px;
