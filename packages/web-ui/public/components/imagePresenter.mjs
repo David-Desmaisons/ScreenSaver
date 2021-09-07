@@ -1,24 +1,13 @@
 import {
     updateBackgroundImage
-} from "../dom/updateBackgroundImage.mjs"
+} from "../js/dom/updateBackgroundImage.mjs"
 
 const template = document.createElement('template');
 template.innerHTML = `
-  <style>
-  .image-presenter {
-    width:inherit;
-    height:inherit;
-    background-size: cover;
-    background-position: center;
-    -webkit-transition: background-image 0.2s ease-in-out;
-    transition: background-image 0.2s ease-in-out;
-  }
-  </style>
- 
-  <div class="image-presenter">
+  <link href="components/image-presenter.css" rel="stylesheet">
+  <div class="image-presenter loading loadable">
   </div>
 `;
-
 
 class ImagePresenter extends HTMLElement {
     constructor() {
@@ -35,11 +24,23 @@ class ImagePresenter extends HTMLElement {
         return ['url'];
     }
 
-    async attributeChangedCallback(name, _, newVal) {
+    get url() {
+        return this.getAttribute('url');
+    }
+
+    set url(newValue) {
+        this.setAttribute('url', newValue);
+    }
+
+    async attributeChangedCallback(name, _, newValue) {
         if (name !== "url") {
             return;
         }
-        await updateBackgroundImage(this.root, newVal);
+        const loaded = await updateBackgroundImage(this.root, newValue);
+        if (!loaded) {
+            return;
+        }
+        this.root.classList.remove("loading");
     }
 }
 

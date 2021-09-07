@@ -1,16 +1,6 @@
 #loader {
     width: 25%;
     height: 25%;
-    --color-text: #fff;
-    --color-bg: #111;
-    --color-link: #aaa;
-    --color-link-hover: #fff;
-    --color-alt: #7f6a57;
-    color: var(--color-text);
-    background-color: var(--color-bg);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    counter-reset: contentSection;
 }
 
 #presenter {

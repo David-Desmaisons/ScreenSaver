@@ -1,0 +1,10 @@
+@import url("../css/loadable.css");
+
+.image-presenter {
+  width:inherit;
+  height:inherit;
+  background-size: cover;
+  background-position: center;
+  -webkit-transition: background-image 0.2s ease-in-out;
+  transition: background-image 0.2s ease-in-out;
+}
