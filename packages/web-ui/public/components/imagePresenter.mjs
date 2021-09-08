@@ -1,6 +1,9 @@
 import {
     updateBackgroundImage
 } from "../js/dom/updateBackgroundImage.mjs"
+import {
+    createEvent
+} from "./helper/events.mjs";
 
 const template = document.createElement('template');
 template.innerHTML = `
@@ -37,6 +40,12 @@ class ImagePresenter extends HTMLElement {
             return;
         }
         const loaded = await updateBackgroundImage(this.root, newValue);
+
+        const eventName = loaded ? 'changedImage' : 'errorLoading';
+        const event = createEvent(eventName, {
+            url: newValue
+        });    
+        this.root.dispatchEvent(event);
         if (!loaded) {
             return;
         }

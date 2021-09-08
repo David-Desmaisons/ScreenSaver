@@ -13,11 +13,6 @@
     <meta property="og:title" content="Screen saver Debug">
     <meta property="og:type" content="website">
     <meta property="og:description" content="Screen saver components.">
-    <meta property="og:image" content="image.png">
-
-    <link rel="icon" href="/favicon.ico">
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/styles.css?v=1.0">
@@ -28,11 +23,12 @@
     <div id="loader" class="loadable loading">
     </div>
 
-    <image-presenter id="presenter" url="https://getwallpapers.com/wallpaper/full/6/2/8/39391.jpg">
+    <image-presenter id="presenter" url="http://www.bing.com//th?id=OHR.MassachusettsHumpbacks_EN-US3647778341_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp">
     </image-presenter>
 
     <script type="module">
         import * as _ from "./components/imagePresenter.mjs";
+        presenter.addEventListener("changedImage", ({detail}) => console.log(detail))
     </script>
 </body>
 
