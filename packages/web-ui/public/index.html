@@ -24,8 +24,11 @@
 </head>
 
 <body>
-    <div id="main" class="loadable loading"></div>
+    <image-presenter id="main">
+    </image-presenter>
+
     <script type="module">
+        import "./components/imagePresenter.mjs";
         import * as query from "./js/application/query.mjs";
         import * as command from "./js/application/command.mjs";
         import { runApp } from "./js/app.mjs";

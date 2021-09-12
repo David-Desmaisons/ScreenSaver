@@ -4,12 +4,10 @@ import {
 
 async function updateImage({
     element,
-    command,
     query
 }) {
     const info = await query.getRandomImageInfo();
-    await command.updateBackgroundImage(element, info.url);
-    element.classList.remove("loading");
+    element.url = info.url;
 }
 
 function prepareDom(element) {
@@ -25,7 +23,6 @@ function runApp({
     command.requestFullScreen();
     const update = () => updateImage({
         element,
-        command,
         query
     });
     update();

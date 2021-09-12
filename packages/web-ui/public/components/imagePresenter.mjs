@@ -9,6 +9,7 @@ const template = document.createElement('template');
 template.innerHTML = `
   <link href="components/image-presenter.css" rel="stylesheet">
   <div class="image-presenter loading loadable">
+    <slot></slot>
   </div>
 `;
 
