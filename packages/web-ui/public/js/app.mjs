@@ -2,31 +2,43 @@ import {
     options
 } from "./config.mjs";
 
-async function updateImage({
+async function updateImageRandom({
     element,
-    query
+    query,
+    options = {}
 }) {
-    const info = await query.getRandomImageInfo();
+    const info = await query.getRandomImageInfo(options);
     element.url = info.url;
 }
 
-function prepareDom(element) {
-    element.classList.add("cover");
-}
+let timerId;
 
 function runApp({
     element,
     command,
     query
 }) {
-    prepareDom(element);
     command.requestFullScreen();
-    const update = () => updateImage({
+    const updateImage = (options) => updateImageRandom({
         element,
-        query
+        query,
+        options
     });
-    update();
-    setInterval(update, options.refreshInMinutes * 60 * 1000)
+    const periodicChange = () => {
+        timerId = setInterval(updateImage, options.refreshInMinutes * 60 * 1000);
+    };
+    const startCycle = (options = {}) => {
+        updateImage(options);
+        periodicChange();
+    };
+
+    startCycle();
+    return {
+        changeImage: (options) => {
+            clearInterval(timerId);
+            startCycle(options);
+        }
+    };
 }
 
 export {
