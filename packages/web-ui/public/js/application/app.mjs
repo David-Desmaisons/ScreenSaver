@@ -37,6 +37,9 @@ function runApp({
             changeImage: (view, options) => {
                 clearInterval(timerId);
                 timerId = startCycle(view, query, timeInMs, options);
+            },
+            stop: () => {
+                clearInterval(timerId);
             }
         }
     });
