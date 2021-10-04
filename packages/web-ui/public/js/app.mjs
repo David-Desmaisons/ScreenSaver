@@ -8,7 +8,7 @@ import {
     ApplicationViewModel
 } from "./application/appVm.mjs";
 import {
-    mainView
+    mainView as view
 } from "./view/mainView.mjs";
 
 function runApp({
@@ -21,8 +21,8 @@ function runApp({
         command,
         query
     });
-    const view = mainView(element);
     createApplication({
+        element,
         viewModel,
         view
     });

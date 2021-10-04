@@ -3,14 +3,16 @@ import {
 } from "./observable.mjs"
 
 function createApplication({
+    element,
     viewModel,
     view
 }) {
+    const viewInstance = view(element);
     const observable = makeObservable({
         target: viewModel,
-        callBack: view.update.bind(view),
+        callBack: viewInstance.update.bind(viewInstance),
     });
-    view.create(observable);
+    viewInstance.create(observable);
     observable.run();
 }
 
