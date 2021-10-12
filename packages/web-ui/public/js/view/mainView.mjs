@@ -25,9 +25,9 @@ class MainView {
             <image-presenter class="main" url=${state.url}>
                 <div class="main-container">
                     <div class="icons">
-                        <i class="expand las ${getFullscreenIcon(isFullScreen())}"></i>
-                        <i class="redo las la-redo"></i>
+                        <i class="expand las ${getFullscreenIcon(isFullScreen())}"></i>                     
                         <i class="pin las la-thumbtack"></i>
+                        <i class="redo las la-redo"></i>
                     </div>
                 </div>
             </image-presenter>`;
