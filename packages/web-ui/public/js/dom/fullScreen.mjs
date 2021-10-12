@@ -43,9 +43,17 @@ function toggleFullScreen() {
     return isFullScreen() ? exitFullScreen() : requestFullScreen();
 }
 
+function listenToFullScreen(callback) {
+    document.onfullscreenchange = () => {
+        callback(isFullScreen());
+    };
+}
+
+
 export {
     toggleFullScreen,
     requestFullScreen,
     exitFullScreen,
+    listenToFullScreen,
     isFullScreen
 }
