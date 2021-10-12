@@ -21,8 +21,7 @@ class MainView {
             </image-presenter>`;
         this._presenter = this._element.querySelector("image-presenter");
         this._button = this._element.querySelector("div.main-container");
-        this._button.addEventListener("click", toggleFullScreen)
-        console.log(this._button)
+        this._button.addEventListener("click", toggleFullScreen);
     }
 
     update(state) {
