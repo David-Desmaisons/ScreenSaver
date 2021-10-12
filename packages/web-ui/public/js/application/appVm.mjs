@@ -25,10 +25,6 @@ class ApplicationViewModel {
         this._startCycle(options);
     }
 
-    requestFullScreen() {
-        this._command.requestFullScreen();
-    }
-
     async _updateImage(options = {}) {
         const info = await this._query.getRandomImageInfo(options);
         this.url = info.url;

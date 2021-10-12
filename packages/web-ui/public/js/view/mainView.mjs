@@ -1,4 +1,7 @@
 import "../../components/imagePresenter.mjs";
+import {
+    toggleFullScreen,
+} from "../dom/fullScreen.mjs"
 
 class MainView {
     constructor(element) {
@@ -6,11 +9,20 @@ class MainView {
     }
 
     create(state) {
-        const presenter = document.createElement("image-presenter");
-        presenter.setAttribute("class", "main");
-        presenter.url = state.url;
-        this._presenter = presenter;
-        this._element.appendChild(presenter);
+        this._element.innerHTML =
+            `
+            <link href="js/view/mainView.css" rel="stylesheet">
+            <image-presenter class="main" url=${state.url}>
+                <div class="main-container">
+                    <div class="icons">
+                        <i class="las la-battery-three-quarters"></i>
+                    </div>
+                </div>
+            </image-presenter>`;
+        this._presenter = this._element.querySelector("image-presenter");
+        this._button = this._element.querySelector("div.main-container");
+        this._button.addEventListener("click", toggleFullScreen)
+        console.log(this._button)
     }
 
     update(state) {

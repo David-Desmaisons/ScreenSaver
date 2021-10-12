@@ -1,7 +1,7 @@
 import {
     requestFullScreen,
-} from "../dom/requestFullScreen.mjs"
+} from "../dom/fullScreen.mjs"
 
 export {
-    requestFullScreen,
+    requestFullScreen
 }
