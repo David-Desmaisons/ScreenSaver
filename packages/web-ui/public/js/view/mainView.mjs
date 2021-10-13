@@ -17,17 +17,17 @@ class MainView {
         this._element = element;
     }
 
-    create(state) {
-        this._state = state;
+    create(viewModel) {
+        this._viewModel = viewModel;
         this._element.innerHTML =
             `
             <link href="js/view/mainView.css" rel="stylesheet">
-            <image-presenter class="main" url=${state.url}>
+            <image-presenter class="main" url=${viewModel.url}>
                 <div class="main-container">
                     <div class="icons">
-                        <i class="expand las ${getFullscreenIcon(isFullScreen())}"></i>                     
-                        <i class="pin las la-thumbtack"></i>
-                        <i class="redo las la-redo"></i>
+                        <i class="toggleFullScreen las ${getFullscreenIcon(isFullScreen())}"></i>                     
+                        <i class="stop las la-thumbtack"></i>
+                        <i class="changeImage las la-redo"></i>
                     </div>
                 </div>
             </image-presenter>`;
@@ -37,31 +37,37 @@ class MainView {
     }
 
     setupInteractivity() {
-        const expandButton = this._findButton("expand");
-        expandButton.addEventListener("click", toggleFullScreen);
-    
-        this._findButton("redo").addEventListener("click", () => this.changeImage());
-        this._findButton("pin").addEventListener("click", () => this._state.stop());
+        ["toggleFullScreen", "stop", "changeImage"]
+        .forEach(command => {
+            const button = this._element.querySelector(`div.icons i.${command}`);
+            button.addEventListener("click", () => this[command]());
+            this[`${command}Button`] = button;
+        });
 
         listenToFullScreen(fullscreen => {
             const newClass = getFullscreenIcon(fullscreen);
             const oldClass = getFullscreenIcon(!fullscreen);
-            switchClass(expandButton, newClass, oldClass);
+            switchClass(this.toggleFullScreenButton, newClass, oldClass);
         })
     }
 
-    _findButton(name) {
-        return this._element.querySelector(`div.icons i.${name}`);
+    toggleFullScreen() {
+        toggleFullScreen();
     }
 
     async changeImage() {
         console.log("loading");
-        await this._state.changeImage();
+        await this._viewModel.changeImage();
         console.log("loaded");
     }
 
-    update(state) {
-        this._presenter.url = state.url;
+    stop() {
+        this._viewModel.stop();
+    }
+
+    update(viewModel) {
+        this.viewModel = viewModel;
+        this._presenter.url = viewModel.url;
     }
 }
 

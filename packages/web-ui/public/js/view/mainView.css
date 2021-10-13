@@ -13,4 +13,7 @@
 .icons {
     grid-area: c3;
     display: flex;
+    width: 250px;
+    justify-content: space-around;
+    justify-self: flex-end;
 }
