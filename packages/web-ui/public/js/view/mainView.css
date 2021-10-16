@@ -4,7 +4,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 50px;
-    grid-template-areas: 
+    grid-template-areas:
         "a1 a2 a3"
         "b1 b2 b3"
         "c1 c2 c3";
@@ -19,18 +19,25 @@
 }
 
 .icons i {
-	cursor: pointer;
-	border-radius: 50%;
-	z-index: 1;
-	color: #fff;
-    background: rgba(255,255,255,0.1);
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 1;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
     box-shadow: 0 0 0 4px rgb(255 255 255 / 30%);
+    transition: color 0.2s, opacity 0.2s;
     width: 30px;
     height: 30px;
 }
 
+.icons i:hover {
+    color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 0 4px rgb(255 255 255 / 70%);
+}
+
 .icons i:before {
-	padding: 7px;
-	transition: transform 0.2s, opacity 0.2s;
-	display: block;
+    padding: 7px;
+    transition: transform 0.2s, opacity 0.2s;
+    display: block;
 }
