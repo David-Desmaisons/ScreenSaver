@@ -17,3 +17,20 @@
     justify-content: space-around;
     justify-self: flex-end;
 }
+
+.icons i {
+	cursor: pointer;
+	border-radius: 50%;
+	z-index: 1;
+	color: #fff;
+    background: rgba(255,255,255,0.1);
+    box-shadow: 0 0 0 4px rgb(255 255 255 / 30%);
+    width: 30px;
+    height: 30px;
+}
+
+.icons i:before {
+	padding: 7px;
+	transition: transform 0.2s, opacity 0.2s;
+	display: block;
+}
