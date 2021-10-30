@@ -1,12 +1,11 @@
 import "../../components/imagePresenter.mjs";
+import "../../components/iconButton.mjs";
+
 import {
     toggleFullScreen,
     isFullScreen,
     listenToFullScreen
 } from "../dom/fullScreen.mjs";
-import {
-    switchClass
-} from "../dom/classHelper.mjs";
 
 function getFullscreenIcon(fullscreen) {
     return fullscreen ? "la-compress" : "la-expand";
@@ -25,13 +24,14 @@ class MainView {
             <image-presenter class="main" url=${viewModel.url}>
                 <div class="main-container">
                     <div class="icons">
-                        <i class="toggleFullScreen las ${getFullscreenIcon(isFullScreen())}"></i>                     
-                        <i class="stop las la-thumbtack"></i>
-                        <i class="changeImage las la-redo"></i>
+                        <icon-button class="toggleFullScreen"   icon="${getFullscreenIcon(isFullScreen())}"></icon-button>
+                        <icon-button class="stop"               icon="la-thumbtack"></icon-button>
+                        <icon-button class="changeImage"        icon="la-redo"></icon-button>                       
                     </div>
                 </div>
             </image-presenter>`;
         this._presenter = this._element.querySelector("image-presenter");
+        this._toggleFullScreen = this._element.querySelector(".toggleFullScreen");
 
         this.setupInteractivity();
     }
@@ -39,16 +39,12 @@ class MainView {
     setupInteractivity() {
         ["toggleFullScreen", "stop", "changeImage"]
         .forEach(command => {
-            const button = this._element.querySelector(`div.icons i.${command}`);
+            const button = this._element.querySelector(`div.icons icon-button.${command}`);
             button.addEventListener("click", () => this[command]());
             this[`${command}Button`] = button;
         });
 
-        listenToFullScreen(fullscreen => {
-            const newClass = getFullscreenIcon(fullscreen);
-            const oldClass = getFullscreenIcon(!fullscreen);
-            switchClass(this.toggleFullScreenButton, newClass, oldClass);
-        })
+        listenToFullScreen(fullscreen => this._toggleFullScreen.icon = getFullscreenIcon(fullscreen))
     }
 
     toggleFullScreen() {

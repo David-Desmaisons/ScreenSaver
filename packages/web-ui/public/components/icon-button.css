@@ -1,0 +1,24 @@
+@import url("/node_modules/line-awesome/dist/line-awesome/css/line-awesome.min.css");
+
+i {
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 1;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.01);
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.2s, opacity 0.2s;
+  width: 38px;
+  height: 38px;
+}
+
+i:hover {
+  color: rgba(255, 255, 255);
+  background: rgba(0, 0, 0, 0.38);
+}
+
+i:before {
+  padding: 11px;
+  transition: transform 0.2s, opacity 0.2s;
+  display: block;
+}

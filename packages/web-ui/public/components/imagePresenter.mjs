@@ -21,7 +21,7 @@ class ImagePresenter extends HTMLElement {
             mode: 'open'
         });
         this._shadowRoot.appendChild(template.content.cloneNode(true));
-        this.root = this._shadowRoot.querySelector(".image-presenter");
+        this._root = this._shadowRoot.querySelector(".image-presenter");
     }
 
     static get observedAttributes() {
@@ -40,17 +40,17 @@ class ImagePresenter extends HTMLElement {
         if (name !== "url") {
             return;
         }
-        const loaded = await updateBackgroundImage(this.root, newValue);
+        const loaded = await updateBackgroundImage(this._root, newValue);
 
         const eventName = loaded ? 'changedImage' : 'errorLoading';
         const event = createEvent(eventName, {
             url: newValue
         });    
-        this.root.dispatchEvent(event);
+        this._root.dispatchEvent(event);
         if (!loaded) {
             return;
         }
-        this.root.classList.remove("loading");
+        this._root.classList.remove("loading");
     }
 }
 
