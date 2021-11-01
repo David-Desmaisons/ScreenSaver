@@ -25,14 +25,12 @@ class MainView {
                 <div class="main-container">
                     <div class="icons">
                         <icon-button class="toggleFullScreen"   icon="${getFullscreenIcon(isFullScreen())}"></icon-button>
-                        <icon-button class="stop"               icon="la-thumbtack"></icon-button>
+                        <icon-button class="stop"               icon="la-thumbtack" ${!viewModel.running ? "inverted" : ""}></icon-button>
                         <icon-button class="changeImage"        icon="la-redo"></icon-button>                       
                     </div>
                 </div>
             </image-presenter>`;
         this._presenter = this._element.querySelector("image-presenter");
-        this._toggleFullScreen = this._element.querySelector(".toggleFullScreen");
-
         this.setupInteractivity();
     }
 
@@ -40,6 +38,7 @@ class MainView {
         ["toggleFullScreen", "stop", "changeImage"]
         .forEach(command => {
             const button = this._element.querySelector(`div.icons icon-button.${command}`);
+            this[`_${command}`] = button;
             button.addEventListener("click", () => this[command]());
             this[`${command}Button`] = button;
         });
@@ -57,13 +56,28 @@ class MainView {
         console.log("loaded");
     }
 
-    stop() {
-        this._viewModel.stop();
+    async stop() {
+        if (this._viewModel.running) {
+            this._viewModel.stop();
+            return;
+        }
+        await this._viewModel.changeImage();
     }
 
-    update(viewModel) {
+    update(viewModel, {
+        propertyKey,
+        value
+    }) {
         this.viewModel = viewModel;
-        this._presenter.url = viewModel.url;
+        switch(propertyKey) {
+            case "url":
+                this._presenter.url = value;
+                break;
+
+            case "running":
+                this._stop.inverted = !value;
+                break;
+        }  
     }
 }
 

@@ -9,6 +9,7 @@ class ApplicationViewModel {
         this._query = query;
         this._timeInMs = options.refreshInMinutes * 60 * 1000;
         this.url = null;
+        this.running = false;
     }
 
     run() {
@@ -17,11 +18,12 @@ class ApplicationViewModel {
     }
 
     stop() {
+        this.running = false;
         clearInterval(this._timerId);
     }
 
     changeImage(options) {
-        this.stop();
+        clearInterval(this._timerId);
         this._startCycle(options);
     }
 
@@ -31,6 +33,7 @@ class ApplicationViewModel {
     }
 
     _startCycle(options = {}) {
+        this.running = true;
         const update = () => this._updateImage(options);
         update();
         this._timerId = setInterval(update, this._timeInMs);

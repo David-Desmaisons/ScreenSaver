@@ -1,4 +1,4 @@
-const template = document.createElement('template');
+const template = document.createElement("template");
 template.innerHTML = `
     <link href="components/icon-button.css" rel="stylesheet">
     <i class="las"></i>`;
@@ -8,7 +8,7 @@ class IconButton extends HTMLElement {
         super();
 
         this._shadowRoot = this.attachShadow({
-            mode: 'open'
+            mode: "open"
         });
         this._shadowRoot.appendChild(template.content.cloneNode(true));
         this._root = this._shadowRoot.querySelector(".las");
@@ -16,24 +16,47 @@ class IconButton extends HTMLElement {
     }
 
     static get observedAttributes() {
-        return ['icon'];
+        return ["icon", "inverted"];
     }
 
     get icon() {
-        return this.getAttribute('icon');
+        return this.getAttribute("icon");
     }
 
     set icon(newValue) {
-        this.setAttribute('icon', newValue);
+        this.setAttribute("icon", newValue);
     }
 
-    async attributeChangedCallback(name, odValue, newValue) {
-        if (name !== "icon") {
+    set inverted(newValue) {
+        if (newValue) {
+            this.setAttribute("inverted", "");
             return;
         }
-        this._root.classList.remove(odValue);
-        this._root.classList.add(newValue);
+        this.removeAttribute("inverted");
+    }
+
+    get inverted() {
+        return this.hasAttribute("inverted");
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (oldValue === newValue) {
+            return
+        }
+        switch (name) {
+            case "icon":
+                this._root.classList.remove(oldValue);
+                this._root.classList.add(newValue);
+                break;
+
+            case "inverted":
+                this._root.classList.toggle("inverted", this.inverted);
+                break;
+
+            default:
+                break;
+        }
     }
 }
 
-customElements.define('icon-button', IconButton);
+customElements.define("icon-button", IconButton);
