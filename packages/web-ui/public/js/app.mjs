@@ -1,35 +1,31 @@
 import {
     options
 } from "./config.mjs";
-
-async function updateImage({
-    element,
-    command,
-    query
-}) {
-    const info = await query.getRandomImageInfo();
-    await command.updateBackgroundImage(element, info.url);
-    element.classList.remove("loading");
-}
-
-function prepareDom(element) {
-    element.classList.add("cover");
-}
+import {
+    createApplication
+} from "./infra/appRunner.mjs";
+import {
+    ApplicationViewModel
+} from "./application/appVm.mjs";
+import {
+    mainView as view
+} from "./view/mainView.mjs";
 
 function runApp({
     element,
     command,
     query
 }) {
-    prepareDom(element);
-    command.requestFullScreen();
-    const update = () => updateImage({
-        element,
+    const viewModel = new ApplicationViewModel({
+        options,
         command,
         query
     });
-    update();
-    setInterval(update, options.refreshInMinutes * 60 * 1000)
+    createApplication({
+        element,
+        viewModel,
+        view
+    });
 }
 
 export {

@@ -1,0 +1,39 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Screen saver</title>
+    <meta name="description" content="Screen saver components.">
+    <meta name="author" content="David Desmaisons">
+
+    <meta property="og:title" content="Screen saver Debug">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="Screen saver components.">
+
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/styles.css?v=1.0">
+    <link rel="stylesheet" href="css/styles.dev.css?v=1.0">
+</head>
+
+<body>
+    <div id="loader" class="loading loadable">
+    </div>
+
+    <image-presenter id="presenter" url="http://www.bing.com//th?id=OHR.MassachusettsHumpbacks_EN-US3647778341_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp">
+        <div>
+            <i class="las la-battery-three-quarters"></i>
+            Hello!!
+        </div>
+    </image-presenter>
+
+    <script type="module">
+        import "./components/imagePresenter.mjs";
+        presenter.addEventListener("changedImage", ({detail}) => console.log(detail))
+    </script>
+</body>
+
+</html>

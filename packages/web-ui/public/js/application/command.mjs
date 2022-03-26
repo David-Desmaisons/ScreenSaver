@@ -1,11 +1,7 @@
 import {
     requestFullScreen,
-} from "../dom/requestFullScreen.mjs"
-import {
-    updateBackgroundImage,
-} from "../dom/updateBackgroundImage.mjs"
+} from "../dom/fullScreen.mjs"
 
 export {
-    requestFullScreen,
-    updateBackgroundImage
+    requestFullScreen
 }

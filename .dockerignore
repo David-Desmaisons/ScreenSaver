@@ -4,6 +4,6 @@ yarn-error.log*
 lerna-debug.log*
 
 node_modules/
-
 packages/*/node_modules/
-loader/chromecastdg/node_modules/
+
+packages/web-ui/public/components.html

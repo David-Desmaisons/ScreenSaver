@@ -27,6 +27,33 @@ async function requestFullScreenUnsafe() {
     return true;
 }
 
+async function exitFullScreen() {
+    const {
+        document
+    } = window;
+    const exit = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen || document.msExitFullscreen
+    return exit.call(document);
+}
+
+function isFullScreen() {
+    return window.document.fullscreenElement !== null;
+}
+
+function toggleFullScreen() {
+    return isFullScreen() ? exitFullScreen() : requestFullScreen();
+}
+
+function listenToFullScreen(callback) {
+    document.onfullscreenchange = () => {
+        callback(isFullScreen());
+    };
+}
+
+
 export {
+    toggleFullScreen,
     requestFullScreen,
+    exitFullScreen,
+    listenToFullScreen,
+    isFullScreen
 }
