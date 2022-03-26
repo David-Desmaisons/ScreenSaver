@@ -21,7 +21,7 @@ class MainView {
         this._element.innerHTML =
             `
             <link href="js/view/mainView.css" rel="stylesheet">
-            <image-presenter class="main" url=${viewModel.url}>
+            <image-presenter class="main" ${viewModel.url ? `url=${viewModel.url}` : ''}>
                 <div class="main-container">
                     <div class="icons">
                         <icon-button class="toggleFullScreen"   icon="${getFullscreenIcon(isFullScreen())}"></icon-button>
@@ -40,7 +40,6 @@ class MainView {
             const button = this._element.querySelector(`div.icons icon-button.${command}`);
             this[`_${command}`] = button;
             button.addEventListener("click", () => this[command]());
-            this[`${command}Button`] = button;
         });
 
         listenToFullScreen(fullscreen => this._toggleFullScreen.icon = getFullscreenIcon(fullscreen))
