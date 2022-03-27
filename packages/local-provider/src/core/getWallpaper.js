@@ -6,7 +6,7 @@ const { getConfiguration } = require("./configuration");
 
 function filter(file) {
   const extension = path.extname(file).toLowerCase();
-  return [".jpg", ".jfif", ".jpeg", ".png"].includes(extension);
+  return [".jpg", ".jfif", ".jpeg", ".png", ".gif"].includes(extension);
 }
 
 async function getWallpaper({ chance, directory, host }) {
