@@ -13,7 +13,7 @@ const getWallpaper = ({
     description
   } = chance.pickone(data);
   return {
-    url: `${process.env.baseUrl}/${url}`,
+    url: `${process.env.baseUrl}${url}`,
     description
   }
 }

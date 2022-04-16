@@ -23,7 +23,8 @@ class MainView {
             <link href="js/view/mainView.css" rel="stylesheet">
             <image-presenter class="main" ${viewModel.url ? `url=${viewModel.url}` : ''}>
                 <div class="main-container">
-                    <div class="icons">
+                    <div class="icons">                    
+                        <icon-button class="save"  ${viewModel.provider==='local' || !viewModel.provider ? 'style="display:none;"':''   }         icon="la-save"></icon-button>
                         <icon-button class="toggleFullScreen"   icon="${getFullscreenIcon(isFullScreen())}"></icon-button>
                         <icon-button class="stop"               icon="la-thumbtack" ${!viewModel.running ? "inverted" : ""}></icon-button>
                         <icon-button class="changeImage"        icon="la-redo"></icon-button>                       
@@ -35,7 +36,7 @@ class MainView {
     }
 
     setupInteractivity() {
-        ["toggleFullScreen", "stop", "changeImage"]
+        ["save", "toggleFullScreen", "stop", "changeImage"]
         .forEach(command => {
             const button = this._element.querySelector(`div.icons icon-button.${command}`);
             this[`_${command}`] = button;
@@ -49,10 +50,12 @@ class MainView {
         toggleFullScreen();
     }
 
-    async changeImage() {
-        console.log("loading");
-        await this._viewModel.changeImage();
-        console.log("loaded");
+    changeImage() {
+        return this._viewModel.changeImage();
+    }
+
+    async save() {
+        await this._viewModel.save(this._viewModel.url);
     }
 
     async stop() {
@@ -68,7 +71,7 @@ class MainView {
         value
     }) {
         this.viewModel = viewModel;
-        switch(propertyKey) {
+        switch (propertyKey) {
             case "url":
                 this._presenter.url = value;
                 break;
@@ -76,7 +79,11 @@ class MainView {
             case "running":
                 this._stop.inverted = !value;
                 break;
-        }  
+
+            case "provider":
+                this._save.style.display = value ==="local" ? "none" : null;
+                break;
+        }
     }
 }
 

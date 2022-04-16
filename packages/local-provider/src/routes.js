@@ -1,10 +1,15 @@
 const {
-  localProviderOption
+  localProviderOption,
+  imageInformation,
+  imageResult
 } = require("./model/contract");
 const {
   getConfiguration,
   setConfiguration
 } = require("./core/configuration");
+const {
+  saveImages
+} = require("./core/images");
 const Boom = require("@hapi/boom");
 
 function addRoutes() {
@@ -50,6 +55,40 @@ function addRoutes() {
           path: getConfiguration().rootDirectory
         }
       }
+    },
+    {
+      path: "images",
+      method: "POST",
+      options: {
+        tags: ["api"],
+        response: {
+          schema: imageResult,
+        },
+        validate: {
+          payload: imageInformation,
+        },
+        async handler(request) {
+          try {
+            const {
+              payload: {
+                path
+              },
+              url: {
+                origin: host
+              }
+            } = request;
+            await saveImages({
+              url: path,
+              host
+            });
+            return {
+              success: true
+            };
+          } catch {
+            throw Boom.badRequest();
+          }
+        },
+      },
     }
   ];
 }

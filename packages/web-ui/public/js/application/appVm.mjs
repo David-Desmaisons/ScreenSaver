@@ -9,6 +9,7 @@ class ApplicationViewModel {
         this._query = query;
         this._timeInMs = options.refreshInMinutes * 60 * 1000;
         this.url = null;
+        this.provider = null;
         this.running = false;
     }
 
@@ -27,9 +28,14 @@ class ApplicationViewModel {
         this._startCycle(options);
     }
 
+    save(url) {
+        this._command.save(url);
+    }
+
     async _updateImage(options = {}) {
         const info = await this._query.getRandomImageInfo(options);
         this.url = info.url;
+        this.provider = info.provider;
     }
 
     _startCycle(options = {}) {
