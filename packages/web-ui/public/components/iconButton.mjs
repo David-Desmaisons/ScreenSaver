@@ -1,7 +1,7 @@
 const template = document.createElement("template");
 template.innerHTML = `
     <link href="components/icon-button.css" rel="stylesheet">
-    <i class="las"></i>`;
+    <i class="las" part="icon"></i>`;
 
 class IconButton extends HTMLElement {
     constructor() {

@@ -15,10 +15,11 @@ function post(path, data) {
     });
 }
 
-function save(url) {
-    return post('provider/local/images', {
+async function save(url) {
+    const response = await post('provider/local/images', {
         path: url
-    })
+    });
+    return response.json();
 }
 
 export {

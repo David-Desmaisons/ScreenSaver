@@ -24,7 +24,8 @@ class MainView {
             <image-presenter class="main" ${viewModel.url ? `url=${viewModel.url}` : ''}>
                 <div class="main-container">
                     <div class="icons">                    
-                        <icon-button class="save"  ${viewModel.provider==='local' || !viewModel.provider ? 'style="display:none;"':''   }         icon="la-save"></icon-button>
+                        <icon-button class="save" ${viewModel.provider==='local' || !viewModel.provider ? 'inert':''}
+                                                                icon="la-save"></icon-button>
                         <icon-button class="toggleFullScreen"   icon="${getFullscreenIcon(isFullScreen())}"></icon-button>
                         <icon-button class="stop"               icon="la-thumbtack" ${!viewModel.running ? "inverted" : ""}></icon-button>
                         <icon-button class="changeImage"        icon="la-redo"></icon-button>                       
@@ -81,7 +82,7 @@ class MainView {
                 break;
 
             case "provider":
-                this._save.style.display = value ==="local" ? "none" : null;
+                this._save.toggleAttribute("inert", value ==="local");
                 break;
         }
     }

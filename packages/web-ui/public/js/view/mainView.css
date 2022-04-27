@@ -17,3 +17,13 @@
     justify-content: space-around;
     justify-self: flex-end;
 }
+
+icon-button[inert] {
+    opacity: 0;
+}
+
+icon-button[inert]::part(icon) {
+    cursor: default;
+}
+
+
